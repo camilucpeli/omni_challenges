@@ -37,9 +37,12 @@ namespace OmniChallengesTests
         }
 
         [Test]
-        public void HalfSplitsTest()
+        [TestCase("Possible", new int[] { 0, 3 })]    // There are 3 half meter square sheets. We can use 2 of them to cover the area.
+        [TestCase("Possible", new int[] { 0, 1, 2 })] // This time, we can combine the A[1] sheet with the 2 A[2] sheets and cover one square meter area.
+        [TestCase("Impossible", new int[] { 0, 0, 0, 0, 15 })] // We could do it with 16, but only have 15.
+        public void TestHalfSplit(string expected, int[] sheets)
         {
-            Assert.Pass();
+            Assert.AreEqual(expected, Challenges.CanBuild(sheets));
         }
 
         [Test]

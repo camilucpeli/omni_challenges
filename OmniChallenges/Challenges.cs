@@ -51,9 +51,17 @@ namespace OmniChallenges
             return count;
         }
 
-        public static void HalfSplits()
+        public static string CanBuild(int[] sheets)
         {
+            double meters = 0;
+            
+            for( int i = 0; meters < 1 && i < sheets.Length; i++)
+            {
+                meters += 1/(Math.Pow(2, i)) * sheets[i];
+            }
 
+            if (meters >= 1) return "Possible";
+            return "Impossible";
         }
 
         public static void ThemePark()
