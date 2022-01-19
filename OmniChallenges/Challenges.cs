@@ -64,9 +64,54 @@ namespace OmniChallenges
             return "Impossible";
         }
 
-        public static void ThemePark()
+        public static string CanSellTickets(int[] peopleInLine)
         {
+            Dictionary<int, int> billAmountPairs = new Dictionary<int, int>()
+            {
+                { 25, 0},
+                { 50, 0},
+                { 100, 0},
+            };
 
+            if (peopleInLine[0] != 25) return "NO";
+
+            foreach(int i in peopleInLine)
+            {
+                switch (i)
+                {
+                    case 100:
+                        if(billAmountPairs[50] >= 1 && billAmountPairs[25] >= 1)
+                        {
+                            billAmountPairs[50]--;
+                            billAmountPairs[25]--;
+                        }
+                        else if (billAmountPairs[25] >= 3)
+                        {
+                            billAmountPairs[25] -= 3;
+                        }
+                        else
+                        {
+                            return "NO";
+                        }
+                        break;
+                    case 50:
+                        if (billAmountPairs[25] >= 1) 
+                        {
+                            billAmountPairs[25]--; 
+                        }
+                        else
+                        {
+                            return "NO";
+                        }
+                        break;
+                    case 25:
+                        break;
+                }
+
+                billAmountPairs[i]++;
+            }
+
+            return "YES";
         }
     }
 }

@@ -46,9 +46,12 @@ namespace OmniChallengesTests
         }
 
         [Test]
-        public void ThemeParkTest()
+        [TestCase(new int[] { 25, 25, 50 }, "YES")] // She can use the first or second 25$ to give change to the third person.
+        [TestCase(new int[] { 25, 100 }, "NO")] // Alice won't have enough to give change to the second person.
+        [TestCase(new int[] { 25, 25, 50, 50, 100 }, "NO")] // Alice will not have the right bills to give 75 dollars of change (you can't make two bills of 25 from one of 50)
+        public void TestThemeParkLine(int[] people, string expected)
         {
-            Assert.Pass();
+            Assert.AreEqual(expected, Challenges.CanSellTickets(people));
         }
     }
 }
